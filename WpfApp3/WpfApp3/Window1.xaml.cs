@@ -33,9 +33,9 @@ namespace WpfApp3
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Window3 window3 = new Window3();
+            Window2 window2 = new Window2();
             this.Visibility = Visibility.Hidden;
-            window3.Show();
+            window2.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -47,9 +47,26 @@ namespace WpfApp3
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            Window5 window5 = new Window5();
+            
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            MainWindow MainWindow = new MainWindow();
             this.Visibility = Visibility.Hidden;
-            window5.Show();
+            MainWindow.Show();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            Window3 window3 = new Window3();
+            this.Visibility = Visibility.Hidden;
+            window3.Show();
         }
     }
 }

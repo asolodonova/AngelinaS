@@ -30,5 +30,12 @@ namespace WpfApp3
             this.Visibility = Visibility.Hidden;
             window1.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window1 window1 = new Window1();
+            this.Visibility = Visibility.Hidden;
+            window1.Show();
+        }
     }
 }

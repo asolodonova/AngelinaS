@@ -5,9 +5,182 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="Window3" Height="450" Width="800">
-    <Grid>
-        <Button Content="Вернутся в меню" HorizontalAlignment="Left" Margin="647,359,0,0" VerticalAlignment="Top"/>
+        Title="завтраки" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
 
-    </Grid>
+	<Window.Resources>
+		<!-- Стиль для карточек рецептов -->
+		<Style TargetType="Border" x:Key="RecipeCardStyle">
+			<Setter Property="Background" Value="#FFFAA49A"/>
+			<Setter Property="CornerRadius" Value="10"/>
+			<Setter Property="Width" Value="250"/>
+			<Setter Property="Height" Value="350"/>
+			<Setter Property="Margin" Value="15"/>
+			<Setter Property="Effect">
+				<Setter.Value>
+					<DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="#40000000"/>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!-- Стиль для кнопки -->
+		<Style TargetType="Button" x:Key="BackButtonStyle">
+			<Setter Property="Background" Value="#FFFAA49A"/>
+			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Padding" Value="15 5"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="20">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="#FFE8927A"/>
+								<Setter Property="Cursor" Value="Hand"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+
+	<Grid Background="#FFFFE69B">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Заголовок -->
+		<TextBlock Grid.Row="0"
+                   Text="ЗАВТРАКИ"
+                   HorizontalAlignment="Center"
+                   Margin="0 20"
+                   FontSize="36"
+                   FontFamily="Bahnschrift SemiBold Condensed"
+                   Foreground="#FFFAA49A"/>
+
+		<!-- Карточки рецептов -->
+		<ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="20">
+			<WrapPanel HorizontalAlignment="Center">
+				<!-- Рецепт 1: Тосты с авокадо -->
+				<Border Style="{StaticResource RecipeCardStyle}">
+					<StackPanel>
+						<Image Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\tost.jpg"
+                               Stretch="UniformToFill"
+                               Height="150"/>
+						<TextBlock Text="Тосты с авокадо и красной рыбой"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   Margin="10 10 10 5"
+                                   TextWrapping="Wrap"/>
+						<TextBlock Margin="10 0 10 10"
+                                   TextWrapping="Wrap">
+							<Run Text="⏱ 20 мин"/>
+							<LineBreak/>
+							<Run Text="🍽 2 порции"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="● авокадо"/>
+							<LineBreak/>
+							<Run Text="● ломтик красной рыбы"/>
+							<LineBreak/>
+							<Run Text="● 2 тоста"/>
+							<LineBreak/>
+							<Run Text="● специи по вкусу"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="Нарезать авокадо с рыбой и выложить на тост"/>
+						</TextBlock>
+					</StackPanel>
+				</Border>
+
+				<!-- Рецепт 2: Греческий салат -->
+				<Border Style="{StaticResource RecipeCardStyle}">
+					<StackPanel>
+						<Image Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\smoothie.jpg"
+                               Stretch="UniformToFill"
+                               Height="150"/>
+						<TextBlock Text="Боул с бананами"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   Margin="10 10 10 5"
+                                   TextWrapping="Wrap"/>
+						<TextBlock Margin="10 0 10 10"
+                                   TextWrapping="Wrap">
+							<Run Text="⏱ 15 мин"/>
+							<LineBreak/>
+							<Run Text="🍽 4 порции"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="● помидоры"/>
+							<LineBreak/>
+							<Run Text="● огурцы"/>
+							<LineBreak/>
+							<Run Text="● красный лук"/>
+							<LineBreak/>
+							<Run Text="● фета"/>
+							<LineBreak/>
+							<Run Text="● маслины"/>
+							<LineBreak/>
+							<Run Text="● оливковое масло"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="Нарезать овощи кубиками, добавить сыр и заправить маслом"/>
+						</TextBlock>
+					</StackPanel>
+				</Border>
+
+				<!-- Рецепт 3: Шоколадный мусс -->
+				<Border Style="{StaticResource RecipeCardStyle}">
+					<StackPanel>
+						<Image Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\oatmeal.jpg"
+                               Stretch="UniformToFill"
+                               Height="150"/>
+						<TextBlock Text="Овсяная каша с ягодами"
+                                   FontWeight="Bold"
+                                   FontSize="16"
+                                   Margin="10 10 10 5"
+                                   TextWrapping="Wrap"/>
+						<TextBlock Margin="10 0 10 10"
+                                   TextWrapping="Wrap">
+							<Run Text="⏱ 30 мин + охлаждение"/>
+							<LineBreak/>
+							<Run Text="🍽 6 порций"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="● темный шоколад 200г"/>
+							<LineBreak/>
+							<Run Text="● сливки 33% 300мл"/>
+							<LineBreak/>
+							<Run Text="● яйца 3 шт"/>
+							<LineBreak/>
+							<Run Text="● сахар 50г"/>
+							<LineBreak/>
+							<LineBreak/>
+							<Run Text="Растопить шоколад, взбить сливки и белки, аккуратно смешать"/>
+						</TextBlock>
+					</StackPanel>
+				</Border>
+			</WrapPanel>
+		</ScrollViewer>
+
+		<!-- Кнопка возврата -->
+		<Button Grid.Row="2"
+                Content="Вернуться в меню"
+                HorizontalAlignment="Right"
+                Margin="0 0 20 20"
+                Style="{StaticResource BackButtonStyle}"
+                Click="Button_Click"/>
+	</Grid>
 </Window>
