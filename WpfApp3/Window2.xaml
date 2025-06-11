@@ -5,21 +5,120 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="350">
-    <Grid Background="#FFFAA49A">
-        <Button Content="Вернутся в меню" HorizontalAlignment="Left" Margin="667,360,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="31,92,0,0" TextWrapping="Wrap" Text="Название рецепта" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="31,113,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" SelectionBrush="#FFFFE69B" Foreground="#FF101010"/>
-        <TextBlock HorizontalAlignment="Left" Margin="31,149,0,0" TextWrapping="Wrap" Text="Категория" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="31,170,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" SelectionBrush="#FFFFE69B" Foreground="#FF101010"/>
-        <TextBlock HorizontalAlignment="Left" Margin="31,215,0,0" TextWrapping="Wrap" Text="Время приготовления" VerticalAlignment="Top" RenderTransformOrigin="-0.387,0.601" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="31,236,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" SelectionBrush="#FFFFE69B" Foreground="#FF101010"/>
-        <TextBlock HorizontalAlignment="Left" Margin="31,277,0,0" TextWrapping="Wrap" Text="Ингридиенты" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="31,298,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" SelectionBrush="#FFFFE69B" Foreground="#FF101010"/>
-        <TextBlock HorizontalAlignment="Left" Margin="31,339,0,0" TextWrapping="Wrap" Text="Описание" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="31,362,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Height="23" SelectionBrush="#FFFFE69B" Foreground="#FF101010"/>
-        <Button Content="Вернутся в меню" HorizontalAlignment="Left" Margin="228,389,0,0" VerticalAlignment="Top" Click="Button_Click_1" Background="#FFFFE69B" BorderBrush="#FFFFE69B" Width="109"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="ДОБАВИТЬ РЕЦЕПТ" VerticalAlignment="Top" FontSize="36" FontFamily="Bahnschrift SemiBold Condensed" Foreground="#FFFFE69B" Width="224"/>
+        Title="Добавить рецепт" Height="562" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
+    <Window.Resources>
+        <!-- Стиль для текстовых полей -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0 5 0 15"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="SelectionBrush" Value="#FFFFE69B"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Стиль для кнопки -->
+        <Style TargetType="Button" x:Key="MainButtonStyle">
+            <Setter Property="Background" Value="#FFFFE69B"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15 8"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="20"
+                                BorderThickness="1"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE6D282"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FFD1C070"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#FFFAA49A">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" 
+                   Text="ДОБАВИТЬ РЕЦЕПТ" 
+                   HorizontalAlignment="Center"
+                   Margin="0 20"
+                   TextWrapping="Wrap" 
+                   FontSize="28" 
+                   FontFamily="Bahnschrift SemiBold Condensed" 
+                   Foreground="#FFFFE69B"/>
+
+        <!-- Основное содержимое -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20 0" Margin="0,0,0,31">
+            <StackPanel>
+                <!-- Название рецепта -->
+                <TextBlock Text="Название рецепта" 
+                           FontSize="14"
+                           Foreground="White"/>
+                <TextBox/>
+
+                <!-- Категория -->
+                <TextBlock Text="Категория" 
+                           FontSize="14"
+                           Foreground="White"/>
+                <TextBox/>
+
+                <!-- Время приготовления -->
+                <TextBlock Text="Время приготовления (мин)" 
+                           FontSize="14"
+                           Foreground="White"/>
+                <TextBox/>
+
+                <!-- Ингредиенты -->
+                <TextBlock Text="Ингредиенты" 
+                           FontSize="14"
+                           Foreground="White"/>
+                <TextBox AcceptsReturn="True" 
+                         Height="60"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"/>
+
+                <!-- Описание -->
+                <TextBlock Text="Описание" 
+                           FontSize="14"
+                           Foreground="White"/>
+                <TextBox AcceptsReturn="True" 
+                         Height="100"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопка внизу -->
+        <Button Grid.Row="2" 
+                Content="Вернуться в меню" 
+                HorizontalAlignment="Center"
+                Style="{StaticResource MainButtonStyle}"
+                Click="Button_Click" Margin="0,0,0,13" Height="21" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

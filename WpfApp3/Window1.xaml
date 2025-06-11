@@ -5,26 +5,192 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid Background="#FFFFE69B">
-        <Button Content="Добавить рецепт" HorizontalAlignment="Left" Margin="19,353,0,0" VerticalAlignment="Top" Click="Button_Click_1" FontSize="14" Background="#FFFAA49A" BorderBrush="Black"/>
-        <Button Content="Избранное" HorizontalAlignment="Left" Margin="173,353,0,0" VerticalAlignment="Top" Click="Button_Click_2" FontSize="14" BorderBrush="Black" Background="#FFFAA49A"/>
-        <Button Content="Поиск" HorizontalAlignment="Left" Margin="290,353,0,0" VerticalAlignment="Top" Click="Button_Click_3" FontSize="14" Background="#FFFAA49A" BorderBrush="Black"/>
-        <Button Content="Выйти" HorizontalAlignment="Left" Margin="383,353,0,0" VerticalAlignment="Top" FontSize="14" Click="Button_Click_4" RenderTransformOrigin="0.531,0.448" Background="#FFFAA49A" BorderBrush="Black"/>
-        <TextBlock HorizontalAlignment="Left" Margin="59,258,0,0" TextWrapping="Wrap" Text="Завтраки" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="225,258,0,0" TextWrapping="Wrap" Text="Ланчи" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,258,0,0" TextWrapping="Wrap" Text="Ужины" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="524,258,0,0" TextWrapping="Wrap" Text="Десерты" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="680,258,0,0" TextWrapping="Wrap" Text="Закуски" VerticalAlignment="Top" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="25,99,0,0" TextWrapping="Wrap" Text="Мои рецепты" VerticalAlignment="Top" FontSize="22" Foreground="Black" FontWeight="Bold"/>
-        <Image Margin="25,156,641,185" Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\завтрак.jpg" Stretch="Fill"/>
-        <Image Margin="181,156,485,185" Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\ланч.jpg" Stretch="Fill"/>
-        <Image Margin="488,156,178,185" Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\десерт.jpg" Stretch="Fill"/>
-        <Image Margin="333,156,333,185" Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\ужин.jpg" Stretch="Fill"/>
-        <Image Margin="642,156,24,185" Source="C:\Users\User\source\repos\WpfApp3\WpfApp3\закуски.jpg" Stretch="Fill"/>
-        <Ellipse HorizontalAlignment="Center" Height="59" Margin="0,31,0,0" Stroke="Black" VerticalAlignment="Top" Width="176"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,42,0,0" TextWrapping="Wrap" Text="МЕНЮ" VerticalAlignment="Top" FontSize="36" FontFamily="Bahnschrift SemiBold Condensed" Foreground="#FFFAA49A"/>
+        Title="Кулинарное меню" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFFFE69B">
+    <Window.Resources>
+        <!-- Стиль для кнопок -->
+        <Style TargetType="Button" x:Key="MenuButtonStyle">
+            <Setter Property="Background" Value="#FFFAA49A"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="30 20"/>
+            <Setter Property="Margin" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="20"
+                                BorderThickness="1"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE8927A"/>
+                                <Setter Property="BorderBrush" Value="#FFD17A62"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FFD17A62"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
+        <!-- Стиль для карточек рецептов -->
+        <Style TargetType="Border" x:Key="RecipeCardStyle">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Color="#FFD4B6B2"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="5" Color="#FFFAA49A"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Основной контейнер -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="#FFFAA49A" Padding="10" Margin="0,0,0,473" Grid.RowSpan="2">
+            <TextBlock Text="МЕНЮ" 
+                       FontSize="52" 
+                       FontFamily="Bahnschrift SemiBold Condensed" 
+                       Foreground="White"
+                       HorizontalAlignment="Center" Margin="0,14,0,25"/>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,116,0,170">
+            <StackPanel Margin="20">
+
+                <!-- Карточки рецептов -->
+
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <!-- Карточки рецептов -->
+                <TextBlock Text="Мои рецепты" 
+                           FontSize="30" 
+                           FontWeight="Bold" Height="63"
+                           />
+                <WrapPanel Width="961">
+
+                    <!-- Завтраки -->
+                    <Border Style="{StaticResource RecipeCardStyle}" Margin="10">
+                        <StackPanel>
+                            <Image Source="C:\Users\User\Desktop\WpfApp3\завтрак.jpg" 
+                                   Stretch="UniformToFill"
+                                   Height="100"/>
+                            <TextBlock Text="Завтраки" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0 5"
+                                       FontWeight="SemiBold" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Ланчи -->
+                    <Border Style="{StaticResource RecipeCardStyle}" Margin="10">
+                        <StackPanel>
+                            <Image Source="C:\Users\User\Desktop\WpfApp3\ланч.jpg" 
+                                   Stretch="UniformToFill"
+                                   Height="100"/>
+                            <TextBlock Text="Ланчи" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0 5"
+                                       FontWeight="SemiBold" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Ужины -->
+                    <Border Style="{StaticResource RecipeCardStyle}" Margin="10">
+                        <StackPanel>
+                            <Image Source="C:\Users\User\Desktop\WpfApp3\ужин.jpg" 
+                                   Stretch="UniformToFill"
+                                   Height="100"/>
+                            <TextBlock Text="Ужины" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0 5"
+                                       FontWeight="SemiBold" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Десерты -->
+                    <Border Style="{StaticResource RecipeCardStyle}" Margin="10">
+                        <StackPanel>
+                            <Image Source="C:\Users\User\Desktop\WpfApp3\десерт.jpg" 
+                                   Stretch="UniformToFill"
+                                   Height="100"/>
+                            <TextBlock Text="Десерты" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0 5"
+                                       FontWeight="SemiBold" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Закуски -->
+                    <Border Style="{StaticResource RecipeCardStyle}" Margin="10">
+                        <StackPanel>
+                            <Image Source="C:\Users\User\Desktop\WpfApp3\закуски.jpg" 
+                                   Stretch="UniformToFill"
+                                   Height="100"/>
+                            <TextBlock Text="Закуски" 
+                                       HorizontalAlignment="Center"
+                                       Margin="0 5"
+                                       FontWeight="SemiBold" FontSize="16"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
+                <!-- Карточки рецептов -->
+
+                <!-- Карточки рецептов -->
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Нижнее меню -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,414,0,0" Width="1000">
+            <Button Content="Добавить рецепт" 
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="Button_Click_1" Width="161" Height="32"/>
+            <Button Content="Избранное" 
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="Button_Click_2" Width="111" Height="32"/>
+            <Button Content="Поиск" 
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="Button_Click_3" Width="69" Height="32"/>
+            <Button Content="Выйти" 
+                    Style="{StaticResource MenuButtonStyle}"
+                    Click="Button_Click_4" Width="70" Height="32"/>
+        </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1125,284,0,0" Grid.Row="1" VerticalAlignment="Top" Width="0"/>
+        <Button HorizontalAlignment="Left" Margin="39,335,0,0" Grid.Row="1" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="120" Height="18" Click="Button_Click_6">
+            <Button Content="Button" Click="Button_Click_7" BorderBrush="White" Foreground="White" Background="White" Height="14" Width="71"/>
+        </Button>
 
     </Grid>
 </Window>
